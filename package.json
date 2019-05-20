@@ -1,0 +1,23 @@
+{
+  "name": "@sismics/ng-table-text",
+  "version": "1.0.0",
+  "description": "Ng-table extensions for AngularJS",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sismics/ng-table-ext.git"
+  },
+  "keywords": [
+    "angularjs",
+    "ng-table"
+  ],
+  "author": "Jean-Marc Tremeaux <jm.tremeaux@sismics.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sismics/ng-table-ext/issues"
+  },
+  "homepage": "https://github.com/sismics/ng-table-ext/",
+  "dependencies": {
+  }
+}
