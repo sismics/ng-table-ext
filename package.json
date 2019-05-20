@@ -1,5 +1,5 @@
 {
-  "name": "@sismics/ng-table-text",
+  "name": "@sismics/ng-table-ext",
   "version": "1.0.0",
   "description": "Ng-table extensions for AngularJS",
   "scripts": {
