@@ -60,26 +60,6 @@ angular
                     this.total() > this.count()
             };
 
-            /**
-             * Select / unselect a single item from this table.
-             *
-             * @param item Item to select
-             */
-            tableParams.selectListItem = function(item) {
-                this.selectedItem = this.selectedItem != item ? item : null;
-            };
-
-            /**
-             * Checks if an item from this table is selected.
-             *
-             * @param item Item to check
-             * @returns Condition
-             */
-            tableParams.isListItemSelected = function(item) {
-                return this.selectedItem && this.selectedItem.id == item.id ||
-                    this.selectedItem == item;
-            };
-
             tableParams.pageStart = function() {
                 return (this.page() - 1) * this.count() + 1;
             };
@@ -102,10 +82,12 @@ angular
             /**
              * Checks if all items are selected.
              *
+             * @param $event The event
              * @returns Condition
              */
-            tableParams.updateAllItemSelected = function() {
+            tableParams.updateAllItemSelected = function($event) {
                 tableParams.allItemSelected = this.getMultipleSelection().length === this.data.length;
+                $event.stopPropagation();
             };
 
             /**
