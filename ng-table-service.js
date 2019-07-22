@@ -270,6 +270,14 @@ angular
         this.saveData = function(params) {
             sessionStorage.setItem(getDataTableKey(), JSON.stringify(getSaveData(params)));
         };
+
+        this.setFilterData = function(filter) {
+            var savedParams = JSON.parse(sessionStorage.getItem(getDataTableKey()));
+            savedParams = savedParams != null ? getSaveData(savedParams) : {};
+            angular.extend(savedParams, {filter: filter});
+            this.saveData(savedParams);
+        };
+
         this.isShowSearch = function(searchData) {
             return !_.isEmpty(_.omitBy(searchData, _.isNil));
         }
