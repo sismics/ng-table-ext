@@ -166,6 +166,37 @@ angular
                     isFilterEmpty(this.filter());
             };
 
+            /**
+             * Returns true if this filter is active.
+             *
+             * @param filter
+             * @returns {boolean|boolean}
+             */
+            tableParams.isFilterActive = function(filter) {
+                return typeof filter != 'object' && filter != '';
+            };
+
+            /**
+             * Remove this filter.
+             *
+             * @param filter The filter to remove
+             */
+            tableParams.removeFilter = function(filter) {
+                this.filter(_.omit(tableParams.filter(), filter));
+            };
+
+            /**
+             * Returns the tooltip for this filter.
+             *
+             * @param filter The filter to remove
+             */
+            tableParams.filterTooltip = function(filter) {
+                return {
+                    'title': $translate.instant('label_filter_remove', {'name' : filter}),
+                    'trigger': "hover"
+                };
+            };
+
             return tableParams;
         };
 
@@ -280,9 +311,18 @@ angular
 
         this.isShowSearch = function(searchData) {
             return !_.isEmpty(_.omitBy(searchData, _.isNil));
-        }
+        };
     })
     .run(function($templateCache) {
         $templateCache.put('ng-table/pager.html', '<div class="ng-cloak ng-table-pager" ng-show="params.showPager()"><span>{{ "table_page_total" | translate : { total: params.total()} }} </span><div ng-if="params.settings().counts.length" class="ng-table-counts btn-group pull-right"> <button ng-repeat="count in params.settings().counts" type="button" ng-class="{\'active\':params.count()==count}" ng-click="params.count(count)" class="btn btn-default"> <span ng-bind="(count == params.settings().all ? params.settings().allLabel : count)"></span> </button> </div> <ul class="list-inline ng-table-pagination"> <li ng-class="{\'disabled\': !page.active && !page.current, \'active\': page.current}" ng-repeat="page in pages" ng-switch="page.type"> <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">←</a> <a ng-switch-when="first" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="page" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="more" ng-click="params.page(page.number)" href="">&#8230;</a> <a ng-switch-when="last" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="next" ng-click="params.page(page.number)" href="">→</a> </li> </ul> </div> ');
         $templateCache.put('ng-table/filters/selectAllButtonFilter.html', '<input type="checkbox" name="selectAllFilter" ng-model="params.allItemSelected" ng-click="params.switchSelectAll()" class="btn-select-all"/>');
+    })
+    .component('filterList', {
+        bindings: {
+            tableParams: '=',
+            labelPrefix: '='
+        },
+        template: '<div class="active-filter">' +
+        '            <button ng-repeat="(key, filter) in $ctrl.tableParams.filter()" class="btn btn-info btn-xs br4" bs-tooltip="$ctrl.tableParams.filterTooltip(key)" ng-if="$ctrl.tableParams.isFilterActive(filter)" ng-click="$ctrl.tableParams.removeFilter(key)">{{$ctrl.labelPrefix + key | translate}} : {{filter}} <i class="fas fa-times-circle"></i></button>' +
+        '          </div>'
     });
