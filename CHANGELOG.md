@@ -1,4 +1,6 @@
 ## Change Log
+### Version 1.3.0 (2020-04-25)
+- Add current filter buttons
 ### Version 1.2.0 (2019-07-22)
 - Set filter data
 ### Version 1.1.0 (2019-05-22)
