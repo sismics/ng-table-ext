@@ -322,7 +322,13 @@ angular
             tableParams: '=',
             labelPrefix: '='
         },
+        controller: function($translate) {
+            var ctrl = this;
+            ctrl.getLabel = function(key) {
+                return $translate.instant((ctrl.labelPrefix + key).replace(/\./g, '_'));
+            }
+        },
         template: '<div class="active-filter">' +
-        '            <button ng-repeat="(key, filter) in $ctrl.tableParams.filter()" class="btn btn-info btn-xs br4" bs-tooltip="$ctrl.tableParams.filterTooltip(key)" ng-if="$ctrl.tableParams.isFilterActive(filter)" ng-click="$ctrl.tableParams.removeFilter(key)">{{$ctrl.labelPrefix + key | translate}} : {{filter}} <i class="fas fa-times-circle"></i></button>' +
+        '            <button ng-repeat="(key, filter) in $ctrl.tableParams.filter()" class="btn btn-info btn-xs br4" bs-tooltip="$ctrl.tableParams.filterTooltip($ctrl.getLabel(key))" ng-if="$ctrl.tableParams.isFilterActive(filter)" ng-click="$ctrl.tableParams.removeFilter(key)">{{$ctrl.getLabel(key)}} : {{filter}} <i class="fas fa-times-circle"></i></button>' +
         '          </div>'
     });

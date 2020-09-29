@@ -1,4 +1,7 @@
 ## Change Log
+### Version 1.3.1 (2020-09-29)
+- Add labels for filter buttons
+- Add CD
 ### Version 1.3.0 (2020-04-25)
 - Add current filter buttons
 ### Version 1.2.0 (2019-07-22)
