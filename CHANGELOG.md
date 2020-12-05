@@ -1,4 +1,6 @@
 ## Change Log
+### Version 1.4.0 (2020-12-05)
+- Select multiple items with shift key
 ### Version 1.3.1 (2020-09-29)
 - Add labels for filter buttons
 - Add CD
